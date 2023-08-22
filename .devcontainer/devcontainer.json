@@ -29,7 +29,8 @@
 		"vscode": {
 			"extensions": [
 				"prisma.prisma",
-				"github.copilot"
+				"github.copilot",
+				"humao.rest-client"
 			]
 		}
 	}
