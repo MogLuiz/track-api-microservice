@@ -28,7 +28,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"prisma.prisma"
+				"prisma.prisma",
+				"github.copilot"
 			]
 		}
 	}
