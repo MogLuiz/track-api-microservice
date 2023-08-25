@@ -11,15 +11,30 @@ datasource db {
 }
 
 model Route {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   source      Place
   destination Place
   distance    Float
   duration    Float
   directions  Json
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  RouteDriver RouteDriver[]
+}
+
+model RouteDriver {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  route     Route    @relation(fields: [routeId], references: [id])
+  routeId   String   @db.ObjectId
+  points    Point[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+type Point {
+  location  Coord
+  createdAt DateTime @default(now())
 }
 
 type Place {
