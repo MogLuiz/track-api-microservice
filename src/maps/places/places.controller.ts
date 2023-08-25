@@ -3,7 +3,7 @@ import { PlacesService } from './places.service';
 
 @Controller('places')
 export class PlacesController {
-  constructor(private placesService: PlacesService) {}
+  constructor(private placesService: PlacesService) { }
 
   @Get()
   findPlace(@Query('text') text: string) {
