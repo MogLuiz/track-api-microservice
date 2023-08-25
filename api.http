@@ -1,6 +1,9 @@
 GET http://localhost:3000/routes
 
 ###
+GET http://localhost:3000/routes/64e48195616a41fc946552dd
+
+###
 POST http://localhost:3000/routes
 Content-Type: application/json
 
