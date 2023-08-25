@@ -7,7 +7,12 @@ import { ConfigModule } from '@nestjs/config';
 import { MapsModule } from './maps/maps.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, RoutesModule, MapsModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule,
+    RoutesModule,
+    MapsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
