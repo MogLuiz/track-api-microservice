@@ -17,7 +17,7 @@ export class RoutesController {
 
   @Post()
   create(@Body() createRouteDto: CreateRouteDto) {
-    return this.routesService.create({ createRouteDto });
+    return this.routesService.create(createRouteDto);
   }
 
   @Get()
@@ -27,7 +27,7 @@ export class RoutesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.routesService.findOne(+id);
+    return this.routesService.findOne(id);
   }
 
   @Patch(':id')
