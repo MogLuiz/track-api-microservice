@@ -3,7 +3,7 @@
 import { FormEvent } from "react";
 
 export default function NewRoutePage() {
-  function handleSearchPlaces(event: FormEvent) {
+  async function handleSearchPlaces(event: FormEvent) {
     event.preventDefault();
 
     const source = (document.getElementById("source") as HTMLInputElement)
@@ -11,6 +11,16 @@ export default function NewRoutePage() {
     const destination = (
       document.getElementById("destination") as HTMLInputElement
     ).value;
+
+    const [sourceResponse, destinationResponse] = await Promise.all([
+      fetch(`http://localhost:3000/places?text=${source}`),
+      fetch(`http://localhost:3000/places?text=${destination}`),
+    ]);
+
+    const [sourcePlaces, destinationPlaces] = await Promise.all([
+      sourceResponse.json(),
+      destinationResponse.json(),
+    ]);
   }
 
   return (
