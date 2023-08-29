@@ -1,9 +1,29 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
+import { Loader } from "@googlemaps/js-api-loader";
 import type { FindPlaceFromTextResponseData } from "@googlemaps/google-maps-services-js";
 
 export default function NewRoutePage() {
+  useEffect(() => {
+    (async () => {
+      const loader = new Loader({
+        apiKey: process.env.GOOGLE_MAPS_API_KEY as string,
+        libraries: ["routes", "geometry"],
+      });
+
+      await Promise.all([
+        loader.importLibrary("routes"),
+        loader.importLibrary("geometry"),
+      ]);
+
+      new google.maps.Map(document.getElementById("map") as HTMLElement, {
+        zoom: 15,
+        center: { lat: -23.5505, lng: -46.6333 },
+      });
+    })();
+  }, []);
+
   async function handleSearchPlaces(event: FormEvent) {
     event.preventDefault();
 
