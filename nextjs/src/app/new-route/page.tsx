@@ -46,21 +46,38 @@ export default function NewRoutePage() {
   }
 
   return (
-    <main>
-      <h1>Nova rota</h1>
-      <form
-        style={{ display: "flex", flexDirection: "column" }}
-        onSubmit={handleSearchPlaces}
-      >
-        <div>
-          <input id="source" type="text" placeholder="origem" />
-        </div>
-        <div>
-          <input id="destination" type="text" placeholder="destino" />
-        </div>
+    <main
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <div>
+        <h1>Nova rota</h1>
+        <form
+          style={{ display: "flex", flexDirection: "column" }}
+          onSubmit={handleSearchPlaces}
+        >
+          <div>
+            <input id="source" type="text" placeholder="origem" />
+          </div>
+          <div>
+            <input id="destination" type="text" placeholder="destino" />
+          </div>
 
-        <button type="submit">Pesquisar</button>
-      </form>
+          <button type="submit">Pesquisar</button>
+        </form>
+      </div>
+
+      <div
+        id="map"
+        style={{
+          height: "100%",
+          width: "100%",
+        }}
+      ></div>
     </main>
   );
 }
