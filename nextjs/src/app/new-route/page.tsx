@@ -3,7 +3,10 @@
 import { FormEvent, useEffect, useRef } from "react";
 
 import { useMap } from "../hooks/useMap";
-import type { FindPlaceFromTextResponseData } from "@googlemaps/google-maps-services-js";
+import type {
+  DirectionsResponseData,
+  FindPlaceFromTextResponseData,
+} from "@googlemaps/google-maps-services-js";
 
 export default function NewRoutePage() {
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -43,12 +46,26 @@ export default function NewRoutePage() {
     const directionsResponse = await fetch(
       `http://localhost:3000/directions?originId=${sourcePlaceId}&destinationId=${destinationPlaceId}`
     );
-    const directionsData = await directionsResponse.json();
+    const directionsData: DirectionsResponseData & { request: any } =
+      await directionsResponse.json();
 
     if (directionsData.status !== "OK") {
       alert("Não foi possível encontrar uma rota");
       return;
     }
+
+    await map?.addRouteWithIcons({
+      routeId: "1",
+      startMarkerOptions: {
+        position: directionsData.routes[0].legs[0].start_location,
+      },
+      endMarkerOptions: {
+        position: directionsData.routes[0].legs[0].end_location,
+      },
+      carMarkerOptions: {
+        position: directionsData.routes[0].legs[0].start_location,
+      },
+    });
   }
 
   return (
